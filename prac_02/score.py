@@ -5,11 +5,13 @@ Program to determine score status
 
 
 def main():
+    """Get a score and print result"""
     score = float(input("Enter score: "))
     print(check_score(score))
 
 
 def check_score(score) -> str:
+    """determine result from parameter score"""
     if score < 0 or score > 100:
         return "Invalid score"
     elif score >= 90:
@@ -20,4 +22,5 @@ def check_score(score) -> str:
         return "Bad"
 
 
-main()
+if __name__ == '__main__':
+    main()
