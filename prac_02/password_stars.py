@@ -1,19 +1,20 @@
 """password_stars.py"""
-
+PASSWORD_MINIMUM_LENGTH = 10
 def main():
-    """check password"""
+    """print stars length of password"""
     password = get_password()
-    print_stars(password)
+    print(write_stars(password))
 
 
-def print_stars(password: str):
-    print("*" * len(password))
+def write_stars(password: str):
+    """write line of stars length of password"""
+    return "*" * len(password)
 
 
 def get_password() -> str:
-    password_minimum_length = 10
+    """check password"""
     password = ""
-    while len(password) < password_minimum_length:
+    while len(password) < PASSWORD_MINIMUM_LENGTH:
         password = input("input password: ")
     return password
 
