@@ -5,6 +5,7 @@ get minimum length password, print asterisks length of password
 """
 PASSWORD_MINIMUM_LENGTH = 10
 
+
 def main():
     """print stars length of password"""
     password = get_password()
@@ -13,7 +14,7 @@ def main():
 
 def print_stars(number_of_stars):
     """ Print parameter: 'number_of_stars' number of stars """
-    print( "*" * number_of_stars)
+    print("*" * number_of_stars)
 
 
 def get_password() -> str:

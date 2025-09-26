@@ -20,15 +20,12 @@ print()
 number_of_stars = int(input("Number of stars: "))
 if number_of_stars > 0:
     for i in range(number_of_stars):
-        print( "*", end="")
+        print("*", end="")
         i += 1
     print("")
 
 # d. asks user for number and prints lines of stars with increasing number of stars until it reaches the number
 number_of_lines = int(input("Number of lines: "))
 if number_of_lines > 0:
-    star_string = ""
     for i in range(number_of_lines):
-        star_string += "*"
-        print(star_string)
-        i += 1
+        print("*" * (i + 1))

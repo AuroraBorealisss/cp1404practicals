@@ -26,6 +26,7 @@ def main():
         choice = input(">>> ").upper()
     print("Thank you.")
 
+
 def convert_celsius_to_fahrenheit(celsius):
     """ convert celsius value to fahrenheit"""
     return celsius * 9.0 / 5 + 32
@@ -34,5 +35,3 @@ def convert_celsius_to_fahrenheit(celsius):
 def convert_fahrenheit_to_celsius(fahrenheit):
     """ convert fahrenheit value to celsius"""
     return 5 / 9 * (fahrenheit - 32)
-
-
