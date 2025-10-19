@@ -2,28 +2,12 @@
 CP1404/CP5632 Practical
 wimbledon
 estimation: 60 mins
-actual
+actual: 180 mins
 """
 FILENAME = 'wimbledon.csv'
 INDEX_CHAMPION = 2
 INDEX_COUNTRY = 1
 
-# with open(filename, "r", encoding="utf-8-sig") as in_file:
-"""
-For the final output of countries, use the join method to create a single string.
-
-Use functions for each logical step/chunk of the program.
-If you write it all in main to start with, that's fine, but then refactor it.
-The solution uses 4 functions including main.
-main
-print
-load
-count???
-data storage types:
-list of lists: statistics, lines are list, line is list
-dictionary: like word occurrences, for champion
-set: bc it doesnt add instances
-"""
 def main():
     statistics = load_statistics(FILENAME)
     champion_to_wins, countries = count_champion_to_wins(statistics)
@@ -49,7 +33,7 @@ def load_statistics(filename):
         in_file.readline()
 
         for line in in_file:
-            parts = line.strip().split(',') # accidentally left readline in_file here that took *2 hours* to determine
+            parts = line.strip().split(',')
             statistics.append(parts)
     return statistics
 
