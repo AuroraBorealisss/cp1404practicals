@@ -66,12 +66,12 @@ def save_projects(projects, filename):
             print(repr(project),file=out_file)
 
 
-# def filter_projects(projects):
-#     date_string = input("Show projects that start after date (d/m/yyyy): ")  # e.g., "30/9/2022"
-#     date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-#     for project in projects:
-#         if project.start_date >= date:
-#             print(project)
+def filter_projects(projects):
+    date_string = input("Show projects that start after date (d/m/yyyy): ")  # e.g., "30/9/2022"
+    date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+    for project in projects:
+        if project.start_date >= date:
+            print(project)
 
 
 def add_new_project(projects):
