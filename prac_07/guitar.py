@@ -17,6 +17,10 @@ class Guitar:
         return f"{self.name:>25}, ({self.year}) : ${self.cost:.2f}"
 
 
+    def __repr__(self):
+        return f"{self.name}, {self.year}, {self.cost}"
+
+
     def get_age(self):
         """ Get year of creation, return age of guitar. """
         return 2025 - self.year
