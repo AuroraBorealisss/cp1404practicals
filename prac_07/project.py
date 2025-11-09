@@ -18,4 +18,5 @@ class Project:
         return self.percent_complete == 100
 
     def __repr__(self):
-        return f"{self.name}/t{self.start_date}/t{self.priority}/t{self.cost_estimate}"
+        return f"{self.name}\t{self.start_date}\t{self.priority}\t{self.cost_estimate}"
+

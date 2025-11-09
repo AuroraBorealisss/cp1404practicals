@@ -4,33 +4,43 @@ Estimate: 4 hours
 
 """
 import datetime
-
 from prac_07.project import Project
 
-FILENAME = "projects.txt"
+INITIAL_FILENAME = "projects.txt"
 MENU_STRING = "- (L)oad projects \n- (S)ave projects \n- (D)isplay projects \n- (F)ilter projects \n- (A)dd new projects \n- (U)pdate projects \n- (Q)uit \n>>>"
 
 def main():
     print("Welcome to Pythonic Project Management")
-    projects = load_projects(filename=FILENAME)
-    print(f"Loaded {len(projects)} from {FILENAME}")
+    filename = INITIAL_FILENAME
+    projects = load_projects(filename)
+    print(f"Loaded {len(projects)} from {filename}")
     menu_choice = input(MENU_STRING).lower()
     while menu_choice != "q":
         if menu_choice == "l":
-            load_projects(filename=input("Enter a filename:") or FILENAME)
+            new_filename = input("Enter a filename: ")
+            if new_filename !="":
+                filename = new_filename
+            load_projects(filename)
         elif menu_choice == "s":
-            save_projects(projects, filename=input("Enter a filename:") or FILENAME)
+            new_filename = input("Enter a filename: ")
+            if new_filename !="":
+                filename = new_filename
+            save_projects(projects, filename)
         elif menu_choice == "d":
             display_projects(projects)
         elif menu_choice == "f":
             filter_projects(projects)
         elif menu_choice == "a":
-            add_new_project(projects)
+            get_new_project(projects)
         elif menu_choice == "u":
             update_project(projects)
         else:
             print("Invalid menu choice")
         menu_choice = input(MENU_STRING)
+    user_choice = input(f"Would you like to save to {filename}?").lower()
+    if user_choice == "yes":
+        save_projects(projects, filename)
+    print("Thank you for using custom-built project management software.")
 
 
 
@@ -60,7 +70,9 @@ def display_projects(projects):
 
 
 def save_projects(projects, filename):
-    projects.sort()
+    projects = sorted(projects)
+    for project in projects:
+        project.start_date = project.start_date.strftime('%d/%m/%Y')
     with open(filename, "w",encoding='UTF-8') as out_file:
         for project in projects:
             print(repr(project),file=out_file)
@@ -74,23 +86,56 @@ def filter_projects(projects):
             print(project)
 
 
-def add_new_project(projects):
+def get_new_project(projects):
     #TODO error checking all these inputs tbh
-    name = input("Name: ")
+    name = get_name("Name: ")
     start_date = input("Start date (dd/mm/yy): ")
-    priority = int(input("Priority: "))
+    priority = get_valid_int("Priority: ")
     cost_estimate = input("Cost estimate: $")
-    percent_complete = input("Percent complete: ")
+    percent_complete = get_valid_int("Percent complete: ")
+    if percent_complete > 100 :
+        percent_complete = 100
     projects.append(Project(name, start_date, priority, cost_estimate, percent_complete))
 
 
 def update_project(projects):
     #TODO: all the error checking in this
-    for project, index in enumerate(projects):
+    for index, project in enumerate(projects):
         print(f"{index} {project}")
-    project_choice = int(input("project_choice: "))
+
+    project_choice = get_valid_int("project_choice: ")
     print(projects[project_choice])
-    projects[project_choice].percent_complete = int(input("New Percentage: "))
-    projects[project_choice].priority = int(input("New Priority: "))
+
+    new_percentage = input("New Percentage: ")
+    if new_percentage !="":
+        projects[project_choice].percent_complete = new_percentage
+    new_priority = input("New Priority: ")
+    if new_priority !="":
+        projects[project_choice].priority = new_priority
+
+
+def get_valid_int(prompt):
+    """ Get valid number from user input. """
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            number = int(input(prompt))
+            if number < 0:
+                print("Number must be >= 0")
+            else:
+                is_valid_input = True
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+    return number
+
+
+def get_name(prompt):
+    """ Get unblank name. """
+    choice = input(prompt)
+    while choice == "":
+        print("Input can not be blank")
+        choice = input(prompt)
+    return choice.title()
+
 
 main()
